@@ -1,1 +1,59 @@
-UVA Historical Landmark RecognitionThis repository contains an image classification project focused on recognizing 18 different historical buildings and landmarks at the University of Virginia (UVA) Grounds. The project explores the evolution of Convolutional Neural Network (CNN) architectures, starting from a basic baseline and progressing to a deep model utilizing residual connections.## Project OverviewThe goal of this assignment was to design and compare three distinct neural network architectures to classify Jeffersonian architecture with high accuracy.Dataset: 13K+ images (compressed subset of ~380MB used for benchmarking).Classes: 18 landmarks (e.g., Rotunda, Scott Stadium, Old Cabell Hall, etc.).Framework: PyTorch.## Architectures1. MyCNN1: The BaselineA straightforward sequential CNN designed to establish a performance floor.Structure: 4 Convolutional modules (Conv + BatchNorm + ReLU + MaxPool).Global Pooling: Uses AdaptiveAvgPool2d to handle varying input dimensions.Performance: Achieved ~63% Validation Accuracy within 10 epochs.2. MyCNN2: Deeper & WiderAn expansion of the baseline to capture more complex visual patterns.Structure: Stacked convolutions within each block (two Conv layers per block) to increase non-linearity.Regularization: Increased dropout (0.4) to prevent overfitting.Optimization: Lowered learning rate (0.0005) for more stable convergence.Performance: Significant jump to ~84% Validation Accuracy.3. MyCNN3: Residual Learning (Best Model)A sophisticated architecture inspired by ResNet, designed to solve the vanishing gradient problem in deeper networks.Key Feature: Residual Blocks where the input is added back to the output of the convolutional path (skip connections).Optimization: Switched to AdamW with weight decay and a StepLR scheduler.Early Stopping: Implemented to save the best model weights and prevent overfitting.Performance: Peak Validation Accuracy of 88.42%.## Results ComparisonModelArchitecture TypeKey FeaturesBest Val AccuracyMyCNN1Simple CNNBaseline~63%MyCNN2Deep CNNStacked Convolutions~84%MyCNN3ResNet-styleSkip Connections, AdamW88.42%Training VisualizationThe training process was monitored via Loss and Accuracy curves to identify learning plateaus and overfitting. The final model (MyCNN3) showed the most stable learning curve due to the learning rate scheduler and residual paths.## RequirementsPython 3.xPyTorch / TorchvisionMatplotlibNumPyScikit-learn## How to RunClone the repository.Open the Jupyter Notebook: yourcomputingID_assignment_2.ipynb.Ensure your environment has access to a GPU (Google Colab recommended) for faster training.Run the cells to download the dataset automatically from the Firebase source and begin training.
+# UVA Landmark Recognition: Architectural Evolution
+
+This project focuses on building a deep learning image recognition system to classify **18 different historical buildings and landmarks** at the University of Virginia (UVA) Grounds. The project demonstrates the progression from a simple baseline CNN to a high-performing architecture utilizing residual connections and advanced optimization techniques.
+
+## Project Overview
+UVA's Grounds are famous for their Jeffersonian architecture. This repository contains a PyTorch implementation of three distinct Convolutional Neural Network (CNN) architectures designed to recognize these structures.
+
+* **Dataset:** ~13,000 images across 18 classes (subset: 379MB).
+* **Target:** Exceed 94% accuracy (Bonus threshold).
+* **Framework:** PyTorch & Torchvision.
+
+---
+
+## Model Architectures
+
+### 1. MyCNN1: The Baseline
+A simple sequential architecture to establish a performance floor.
+* **Design:** 4 Convolutional modules (Conv -> BatchNorm -> ReLU -> MaxPool).
+* **Pooling:** Global Average Pooling to ensure compatibility with various input sizes.
+* **Result:** Established initial learning but showed limitations in feature depth.
+
+### 2. MyCNN2: Stacking & Depth
+An evolution focused on increasing the model's capacity to learn complex textures.
+* **Design:** Stacked two convolutional layers per block before pooling.
+* **Refinements:** Increased channel depth (up to 512) and used a lower learning rate ($0.0005$) for stability.
+* **Regularization:** Strategic Dropout ($0.4$) to prevent memorization.
+
+### 3. MyCNN3: Residual Learning (Best Model)
+A sophisticated architecture implementing **Skip Connections** (Residual Blocks) to allow for deeper feature extraction without gradient degradation.
+* **Design:** Custom `ResidualBlock` class combining a convolutional path with a shortcut path.
+* **Optimization:** Switched to `AdamW` and implemented a `StepLR` scheduler.
+* **Early Stopping:** Monitoring validation accuracy to prevent overfitting and save the best weights.
+* **Accuracy:** Achieved a peak validation accuracy of **88.42%**.
+
+---
+
+## Performance Comparison
+
+| Model | Architecture | Key Features | Val Accuracy |
+| :--- | :--- | :--- | :--- |
+| **MyCNN1** | Simple CNN | Baseline | ~63% |
+| **MyCNN2** | Deep CNN | Stacked Layers | ~84% |
+| **MyCNN3** | **ResNet-style**| **Residual Blocks & AdamW** | **88.42%** |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* Python 3.8+
+* PyTorch
+* Torchvision
+* Matplotlib / Seaborn
+* Scikit-learn
+
+### Installation & Usage
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/yourusername/uva-landmark-recognition.git](https://github.com/yourusername/uva-landmark-recognition.git)
