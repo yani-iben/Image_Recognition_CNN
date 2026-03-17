@@ -44,7 +44,7 @@ A sophisticated architecture implementing **Skip Connections** (Residual Blocks)
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 * Python 3.8+
